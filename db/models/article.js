@@ -1,7 +1,6 @@
 const { Model } = require("objection");
 const Category = require("./category");
 const User = require("./user");
-const Image = require("./image");
 
 class Article extends Model {
   static tableName = "article";
@@ -20,14 +19,6 @@ class Article extends Model {
       join: {
         from: "article.category_id",
         to: "category.id",
-      },
-    },
-    image: {
-      relation: Model.BelongsToOneRelation,
-      modelClass: Image,
-      join: {
-        from: "article.id",
-        to: "image.article_id",
       },
     },
   };

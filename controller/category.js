@@ -9,7 +9,7 @@ class CategoryController {
       });
       res.status(201).send(category);
     } catch (e) {
-      res.status(400).send(e);
+      res.status(400).send({ error: e.message });
     }
   }
 
@@ -18,7 +18,7 @@ class CategoryController {
       const categories = await Category.query();
       res.send(categories);
     } catch (e) {
-      res.status(400).send(e);
+      res.status(400).send({ error: e.message });
     }
   }
 
@@ -28,7 +28,7 @@ class CategoryController {
       await Category.query().deleteById(id);
       res.send({ message: "Category has removed" });
     } catch (e) {
-      res.status(400).send(e);
+      res.status(400).send({ error: e.message });
     }
   }
 }

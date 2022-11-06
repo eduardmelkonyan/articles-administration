@@ -22,17 +22,12 @@ exports.up = function (knex) {
       table.increments();
       table.string("name").notNullable();
       table.string("content").notNullable();
-      table.integer("category_id").notNullable().references("id").inTable("category");
-      table.integer("user_id").notNullable().references("id").inTable("user");
+      table.integer("category_id").notNullable().references("id").inTable("category").onDelete('cascade');
+      table.integer("user_id").notNullable().references("id").inTable("user").onDelete('cascade');
       table.binary("image").notNullable();
       table.timestamps(true, true);
     })
-    // .createTable("image", (table) => {
-    //   table.increments();
 
-    //   table.integer("article_id").notNullable().references("id").inTable("article");
-    //   table.timestamps(true, true);
-    // });
 };
 
 /**

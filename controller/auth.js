@@ -28,7 +28,7 @@ class AuthController {
       });
       res.status(201).send(user);
     } catch (e) {
-      res.status(400).send(e);
+      res.status(400).send({ error: e.message });
     }
   }
 
@@ -39,7 +39,7 @@ class AuthController {
       if (!user) {
         return res
           .status(400)
-          .send({ message: `User with ${login} login not found!` });
+          .send({ message: `User with login "${login}" not found!` });
       }
       const validPassword = bcrypt.compareSync(password, user.password);
       if (!validPassword) {
@@ -48,8 +48,7 @@ class AuthController {
       const token = generateAccessToken(user.id, user.role);
       res.send({ token });
     } catch (e) {
-      console.log(e);
-      res.status(400).send(e);
+      res.status(400).send({ error: e.message });
     }
   }
 }
